@@ -1,6 +1,4 @@
-from app .core.config import get_settings
+# 
+# Print the first 500 characters of the first document
 
-settings = get_settings()
-
-print(f"App Name: {settings.app_name}")
 
