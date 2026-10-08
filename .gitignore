@@ -221,3 +221,4 @@ __marimo__/
 
 # runtime data
 data/*.db
+uploads/
