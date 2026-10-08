@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT Support Copilot</title>
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="side">
+    <div class="brand">
+      <h1>IT Support Copilot</h1>
+      <p>Answers from your company knowledge base, with web search as backup.</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn" id="newChat" type="button">New chat</button>
+      <button class="btn ghost" id="openIngest" type="button">Upload document</button>
+    </div>
+
+    <section class="legend" aria-label="Answer sources">
+      <h2>Where answers come from</h2>
+      <dl>
+        <dt><i class="dot kb"></i>Company KB</dt>
+        <dd>Matched your private documents.</dd>
+        <dt><i class="dot web"></i>Web search</dt>
+        <dd>KB had no good match. Confirm with IT before changing managed systems.</dd>
+        <dt><i class="dot none"></i>Not enough evidence</dt>
+        <dd>Neither source was reliable enough.</dd>
+      </dl>
+    </section>
+
+    <div class="status" id="health" role="status">
+      <i class="pulse" aria-hidden="true"></i><span>Checking server…</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="log" id="log" role="log" aria-live="polite" aria-label="Conversation">
+      <div class="empty" id="empty">
+        <h2>What do you need help with?</h2>
+        <p>Ask about VPN, passwords, MFA, laptop setup, software access, or email.</p>
+        <div class="chips" id="chips">
+          <button type="button">How do I reset my password?</button>
+          <button type="button">VPN keeps disconnecting on my laptop</button>
+          <button type="button">How do I set up MFA on a new phone?</button>
+          <button type="button">How do I request software access?</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="composer" id="form" autocomplete="off">
+      <label class="sr" for="q">Your question</label>
+      <textarea id="q" rows="1" maxlength="3000" placeholder="Describe your issue…" required></textarea>
+      <span class="count" id="count" hidden></span>
+      <button class="btn primary" id="send" type="submit">Send</button>
+    </form>
+  </main>
+</div>
+
+<dialog id="ingest" aria-labelledby="ingestTitle">
+  <form method="dialog" class="dlg-head">
+    <h2 id="ingestTitle">Upload to knowledge base</h2>
+    <button class="btn ghost small" aria-label="Close">Close</button>
+  </form>
+  <form id="ingestForm" class="dlg-body">
+    <label for="adminKey">Admin key</label>
+    <input id="adminKey" type="password" autocomplete="off" required>
+
+    <label for="file">Document</label>
+    <div class="drop" id="drop">
+      <input id="file" type="file" accept=".pdf,.txt,.md,.docx,.csv" required>
+      <span id="fileName">Choose a file or drop it here</span>
+    </div>
+
+    <p class="msg" id="ingestMsg" role="status"></p>
+    <button class="btn primary" id="ingestBtn" type="submit">Upload and index</button>
+  </form>
+</dialog>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
